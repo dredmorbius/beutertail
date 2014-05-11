@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# mutitail-newsbeuter
+# Edward Morbius
+# Sun May 11 07:51:58 UTC 2014
+#
+# multitail of rsstail of newsbeuter feeds, with custom header rewriting
+# and color schemes implemented.
+
+tagopt=""
+
+while [ $# -gt 0 ]
+do 
+    tags="$1"
+    tagopt="--tags $tags"
+    shift
+done
+
+eval multitail  -F .multitail --no-load-global-config -CS rsstail $( 
+    ~/bin/newsbeuter2rsstail $tagopt ~/.newsbeuter/urls  
+    )
+
